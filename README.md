@@ -132,7 +132,8 @@ __Examples__
 //config is optional to be passed in on Android
 const optionalConfigObject = {
   title: "Authentication Required",
-  color: "#e00606"
+  color: "#e00606",
+  disableCancel: true // default false. it disables cancel button and makes authentiacation dialog non cancelable.
 }
 
 TouchID.authenticate('to demo this react-native component', optionalConfigObject)
