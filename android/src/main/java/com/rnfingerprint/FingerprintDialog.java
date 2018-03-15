@@ -44,6 +44,7 @@ public class FingerprintDialog extends DialogFragment
 
         getDialog().setTitle(authConfig.getString("title"));
         int color = authConfig.getInt("color");
+        final boolean disableCancel = authConfig.getBoolean("disableCancel");
 
         setCancelable(false);
 
@@ -69,6 +70,7 @@ public class FingerprintDialog extends DialogFragment
 
         mCancelButton = (Button) v.findViewById(R.id.cancel_button);
         mCancelButton.setTextColor(color);
+        if(disableCancel) mCancelButton.setVisibility(View.INVISIBLE);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,8 +82,10 @@ public class FingerprintDialog extends DialogFragment
          {
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event){
             if (keyCode == KeyEvent.KEYCODE_BACK) {
-              dialogCallback.onCancelled();
-              dismiss();
+              if(!disableCancel) {
+                  dialogCallback.onCancelled();
+                  dismiss();
+              }
               return true; // pretend we've processed it
             } else {
               return false; // pass on to be processed as normal
@@ -123,7 +127,10 @@ public class FingerprintDialog extends DialogFragment
     @Override
     public void onError(String errorString) {
         dialogCallback.onError(errorString);
-        dismiss();
+        final boolean disableCancel = authConfig.getBoolean("disableCancel");
+        if(!disableCancel) {
+            dismiss();
+        }
     }
 
     @Override
