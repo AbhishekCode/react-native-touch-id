@@ -17,7 +17,7 @@ export default {
   },
 
   authenticate(reason, config) {
-    DEFAULT_CONFIG = { title: 'Authentication Required', color: '#1306ff' };
+    DEFAULT_CONFIG = { title: 'Authentication Required', color: '#1306ff', disableCancel:false};
     var authReason = reason ? reason : ' ';
     var authConfig = Object.assign({}, DEFAULT_CONFIG, config);
     var color = processColor(authConfig.color);
