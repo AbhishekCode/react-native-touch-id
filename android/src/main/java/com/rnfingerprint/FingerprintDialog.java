@@ -82,7 +82,8 @@ public class FingerprintDialog extends DialogFragment
          {
             public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event){
             if (keyCode == KeyEvent.KEYCODE_BACK) {
-              if(!disableCancel) {
+              //back button causing crash so disabling it, User will have cancel button
+              if(false && !disableCancel) {
                   dialogCallback.onCancelled();
                   dismiss();
               }
